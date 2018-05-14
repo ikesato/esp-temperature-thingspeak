@@ -14,12 +14,19 @@ extern "C" {
 #define DHT_PIN 5
 #define PUSH_INTERVAL (60 * 1000)
 #define ENABLE_SLEEP 1
-
+#define PUSH_COUNT_MAX 10
 
 DHT dht(DHT_PIN, DHT11, 30);
 Ticker ticker;
-unsigned long lastTime = 0;
 
+struct {
+    uint32_t crc32;
+    uint32_t counter;
+    float temperature;
+    float humidity;
+} rtcData;
+
+uint32_t calculateCRC32(const uint8_t *data, size_t length);
 
 // thingspeak
 const char* THING_SPEAK_HOST = "api.thingspeak.com";
@@ -27,18 +34,14 @@ const char* THING_SPEAK_KEY = "9NFQXTZK1KP3WS1U";
 
 
 void deepSleep() {
+    delay(1000);
     Serial.println("zzz...");
     ESP.deepSleep(60 * 1000 * 1000, WAKE_RF_DEFAULT);
 }
 
 void pushData() {
-    float h = dht.readHumidity();
-    float t = dht.readTemperature();
-
-    if (isnan(h) || isnan(t)) {
-        Serial.println("Failed to read from DHT sensor!");
-        return;
-    }
+    float h = rtcData.humidity;
+    float t = rtcData.temperature;
 
     WiFiClient client;
     const int port = 80;
@@ -72,7 +75,7 @@ void pushData() {
         Serial.print(line);
     }
 
-    Serial.print("Pushed to thingspeak!");
+    Serial.println("Pushed to thingspeak!");
 }
 
 
@@ -84,10 +87,73 @@ void blink() {
 
 void setup() {
     Serial.begin(115200);
-
-    dht.begin();
     pinMode(LED_PIN, OUTPUT);
     pinMode(BUTTON_PIN, INPUT);
+    dht.begin();
+
+    digitalWrite(LED_PIN, 1);
+
+    // Read struct from RTC memory
+    if (ESP.rtcUserMemoryRead(0, (uint32_t*)&rtcData, sizeof(rtcData))) {
+        Serial.println("Read: ");
+        uint32_t crcOfData = calculateCRC32(((uint8_t*) &rtcData) + 4, sizeof(rtcData) - 4);
+        Serial.print("CRC32 of data: ");
+        Serial.println(crcOfData, HEX);
+        Serial.print("CRC32 read from RTC: ");
+        Serial.println(rtcData.crc32, HEX);
+        if (crcOfData != rtcData.crc32) {
+            Serial.println("CRC32 in RTC memory doesn't match CRC32 of data.");
+            memset(&rtcData, 0, sizeof(rtcData));
+        } else {
+            Serial.println("CRC32 check ok, data is probably valid.");
+        }
+    }
+
+    // check wakeup reason
+    String resetReason = ESP.getResetReason();
+    if ( resetReason == "Deep-Sleep Wake" ) {
+        rtcData.counter++;
+    } else {
+        rtcData.counter = PUSH_COUNT_MAX;
+    }
+
+    // read sensor values
+    float prevh = rtcData.humidity;
+    float prevt = rtcData.temperature;
+    float h,t;
+    for (int i=0; i<10; i++) {
+        h = dht.readHumidity();
+        t = dht.readTemperature();
+        if (isnan(h) || isnan(t)) {
+            Serial.println("Failed to read from DHT sensor!");
+            if (i==10-1) {
+                Serial.println("I gave up to read sensor.");
+                deepSleep();
+                return;
+            }
+            continue;
+        }
+        break;
+    }
+    rtcData.humidity = h;
+    rtcData.temperature = t;
+    Serial.print("Humidity: ");
+    Serial.print(h);
+    Serial.print("%\tTemperature: ");
+    Serial.print(t);
+    Serial.println("C");
+
+    // write RTC memoery
+    rtcData.crc32 = calculateCRC32(((uint8_t*) &rtcData) + 4, sizeof(rtcData) - 4);
+    ESP.rtcUserMemoryWrite(0, (uint32_t*)&rtcData, sizeof(rtcData));
+
+    // check to push or not
+    if (prevh == rtcData.humidity &&
+        prevt == rtcData.temperature &&
+        rtcData.counter < PUSH_COUNT_MAX) {
+        deepSleep();
+        return;
+    }
 
     // setup WiFi
     WiFiManager wifiManager;
@@ -98,14 +164,16 @@ void setup() {
         Ticker t;
         t.attach_ms(100, blink);
         delay(3000);
-        ESP.restart();
-        return;
     }
     ticker.attach_ms(500, blink);
+    wifiManager.setTimeout(180);
     wifiManager.autoConnect("ESP-TEMPERATURE");
     Serial.println("connected...yeey :)");
     ticker.detach();
-    digitalWrite(LED_PIN, 1);
+
+    // push
+    pushData();
+    deepSleep();
 }
 
 void loop() {
@@ -125,16 +193,23 @@ void loop() {
         }
         return;
     }
+}
 
-#if ENABLE_SLEEP == 1
-    pushData();
-    delay(1000);
-    deepSleep();
-#else
-    unsigned long now = millis();
-    if (now - lastTime >= PUSH_INTERVAL) {
-        pushData();
-        lastTime = now;
+
+uint32_t calculateCRC32(const uint8_t *data, size_t length) {
+    uint32_t crc = 0xffffffff;
+    while (length--) {
+        uint8_t c = *data++;
+        for (uint32_t i = 0x80; i > 0; i >>= 1) {
+            bool bit = crc & 0x80000000;
+            if (c & i) {
+                bit = !bit;
+            }
+            crc <<= 1;
+            if (bit) {
+                crc ^= 0x04c11db7;
+            }
+        }
     }
-#endif
+    return crc;
 }

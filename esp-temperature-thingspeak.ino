@@ -16,7 +16,9 @@ extern "C" {
 #define ENABLE_SLEEP 1
 #define PUSH_COUNT_MAX 10
 
-DHT dht(DHT_PIN, DHT11, 30);
+//DHT dht(DHT_PIN, DHT11); // DHT11
+DHT dht(DHT_PIN, DHT22); // DHT22, AM2302, AM2320, AM2321
+//DHT dht(DHT_PIN, DHT21); // DHT21, AM2301
 Ticker ticker;
 
 struct {
@@ -53,11 +55,11 @@ void pushData() {
 
     String url = "/update?key=";
     url += THING_SPEAK_KEY;
-    url += "&field1=";
+    url += "&field4=";
     url += String(t);
-    url += "&field2=";
+    url += "&field5=";
     url += String(h);
-    url += "&field3=";
+    url += "&field6=";
     url += String(thindex);
 
     Serial.print("Requesting URL: ");

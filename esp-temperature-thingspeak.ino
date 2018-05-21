@@ -106,6 +106,12 @@ void setup() {
             memset(&rtcData, 0, sizeof(rtcData));
         } else {
             Serial.println("CRC32 check ok, data is probably valid.");
+            Serial.print("h:");
+            Serial.print(rtcData.humidity);
+            Serial.print(" t:");
+            Serial.print(rtcData.temperature);
+            Serial.print(" counter:");
+            Serial.println(rtcData.counter);
         }
     }
 
@@ -143,17 +149,21 @@ void setup() {
     Serial.print(t);
     Serial.println("C");
 
-    // write RTC memoery
-    rtcData.crc32 = calculateCRC32(((uint8_t*) &rtcData) + 4, sizeof(rtcData) - 4);
-    ESP.rtcUserMemoryWrite(0, (uint32_t*)&rtcData, sizeof(rtcData));
-
     // check to push or not
     if (prevh == rtcData.humidity &&
         prevt == rtcData.temperature &&
         rtcData.counter < PUSH_COUNT_MAX) {
+        // write RTC memoery
+        rtcData.crc32 = calculateCRC32(((uint8_t*) &rtcData) + 4, sizeof(rtcData) - 4);
+        ESP.rtcUserMemoryWrite(0, (uint32_t*)&rtcData, sizeof(rtcData));
         deepSleep();
         return;
     }
+
+    // write RTC memoery
+    rtcData.counter = 0;
+    rtcData.crc32 = calculateCRC32(((uint8_t*) &rtcData) + 4, sizeof(rtcData) - 4);
+    ESP.rtcUserMemoryWrite(0, (uint32_t*)&rtcData, sizeof(rtcData));
 
     // setup WiFi
     WiFiManager wifiManager;

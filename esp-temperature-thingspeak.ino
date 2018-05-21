@@ -42,6 +42,7 @@ void deepSleep() {
 void pushData() {
     float h = rtcData.humidity;
     float t = rtcData.temperature;
+    float thindex = 0.81 * t + 0.01 * h * (0.99 * t - 14.3) + 46.3;
 
     WiFiClient client;
     const int port = 80;
@@ -50,15 +51,14 @@ void pushData() {
         return;
     }
 
-    String temp = String(t);
-    String humidity = String(h);
-
     String url = "/update?key=";
     url += THING_SPEAK_KEY;
     url += "&field1=";
-    url += temp;
+    url += String(t);
     url += "&field2=";
-    url += humidity;
+    url += String(h);
+    url += "&field3=";
+    url += String(thindex);
 
     Serial.print("Requesting URL: ");
     Serial.println(url);

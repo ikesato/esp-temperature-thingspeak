@@ -7829,30 +7829,64 @@ DIN A4, landscape with location and doc. field</description>
 </library>
 <library name="regulator">
 <packages>
-<package name="SOT-89-5">
-<smd name="2_1" x="0" y="1.85" dx="1" dy="1.5" layer="1"/>
-<smd name="2" x="0" y="-1.85" dx="1" dy="1.5" layer="1"/>
-<smd name="2_3" x="0" y="0.4" dx="1.41" dy="1.41" layer="1" rot="R45" cream="no"/>
-<smd name="2_6" x="0" y="-0.4" dx="1.41" dy="1.41" layer="1" rot="R45" cream="no"/>
+<package name="NJM2884-SOT-89-5">
 <smd name="5" x="-1.5" y="1.85" dx="0.7" dy="1.5" layer="1"/>
 <smd name="1" x="-1.5" y="-1.85" dx="0.7" dy="1.5" layer="1"/>
 <smd name="3" x="1.5" y="-1.85" dx="0.7" dy="1.5" layer="1"/>
 <smd name="4" x="1.5" y="1.85" dx="0.7" dy="1.5" layer="1"/>
-<smd name="2_2" x="0" y="0.9" dx="1" dy="0.5" layer="1" cream="no"/>
-<smd name="2_7" x="0" y="-0.9" dx="1" dy="0.5" layer="1" cream="no"/>
-<smd name="2_4" x="-0.6" y="0" dx="0.8" dy="0.8" layer="1" cream="no"/>
-<smd name="2_5" x="0.6" y="0" dx="0.8" dy="0.8" layer="1" cream="no"/>
-<smd name="2_0" x="0" y="0" dx="0.8" dy="0.8" layer="1"/>
+<smd name="2" x="0" y="0" dx="2" dy="1.2" layer="1"/>
 <wire x1="-2.5" y1="3" x2="2.5" y2="3" width="0.2032" layer="25"/>
 <wire x1="2.5" y1="3" x2="2.5" y2="-3" width="0.2032" layer="25"/>
 <wire x1="2.5" y1="-3" x2="-2.5" y2="-3" width="0.2032" layer="25"/>
 <wire x1="-2.5" y1="-3" x2="-2.5" y2="3" width="0.2032" layer="25"/>
 <text x="-2.54" y="3.81" size="1.27" layer="25">&gt;NAME</text>
 <text x="-2.54" y="-4.445" size="1.27" layer="27">&gt;VALUE</text>
+<polygon width="0.1524" layer="1">
+<vertex x="0.5" y="-2.6"/>
+<vertex x="0.5" y="-1.1"/>
+<vertex x="1" y="-0.6"/>
+<vertex x="1" y="0.6"/>
+<vertex x="0.5" y="1.1"/>
+<vertex x="0.5" y="2.6"/>
+<vertex x="-0.5" y="2.6"/>
+<vertex x="-0.5" y="1.1"/>
+<vertex x="-1" y="0.6"/>
+<vertex x="-1" y="-0.6"/>
+<vertex x="-0.5" y="-1.1"/>
+<vertex x="-0.5" y="-2.6"/>
+</polygon>
+<polygon width="0.1524" layer="31">
+<vertex x="0.5" y="-2.6"/>
+<vertex x="0.5" y="-1.1"/>
+<vertex x="1" y="-0.6"/>
+<vertex x="1" y="0.6"/>
+<vertex x="0.5" y="1.1"/>
+<vertex x="0.5" y="2.6"/>
+<vertex x="-0.5" y="2.6"/>
+<vertex x="-0.5" y="1.1"/>
+<vertex x="-1" y="0.6"/>
+<vertex x="-1" y="-0.6"/>
+<vertex x="-0.5" y="-1.1"/>
+<vertex x="-0.5" y="-2.6"/>
+</polygon>
+<polygon width="0.3524" layer="29">
+<vertex x="0.5" y="-2.6"/>
+<vertex x="0.5" y="-1.1"/>
+<vertex x="1" y="-0.6"/>
+<vertex x="1" y="0.6"/>
+<vertex x="0.5" y="1.1"/>
+<vertex x="0.5" y="2.6"/>
+<vertex x="-0.5" y="2.6"/>
+<vertex x="-0.5" y="1.1"/>
+<vertex x="-1" y="0.6"/>
+<vertex x="-1" y="-0.6"/>
+<vertex x="-0.5" y="-1.1"/>
+<vertex x="-0.5" y="-2.6"/>
+</polygon>
 </package>
 </packages>
 <symbols>
-<symbol name="NJM2884U1">
+<symbol name="NJM2884">
 <pin name="VIN" x="-5.08" y="0" length="middle" direction="pwr"/>
 <pin name="CONTROL" x="-5.08" y="-5.08" length="middle"/>
 <pin name="GND" x="27.94" y="-5.08" length="middle" direction="pwr" rot="R180"/>
@@ -7866,15 +7900,15 @@ DIN A4, landscape with location and doc. field</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="NJM2884U1" prefix="REG">
+<deviceset name="NJM2884" prefix="REG">
 <gates>
-<gate name="G$1" symbol="NJM2884U1" x="0" y="0"/>
+<gate name="G$1" symbol="NJM2884" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="SOT-89-5">
+<device name="" package="NJM2884-SOT-89-5">
 <connects>
 <connect gate="G$1" pin="CONTROL" pad="1"/>
-<connect gate="G$1" pin="GND" pad="2_1"/>
+<connect gate="G$1" pin="GND" pad="2"/>
 <connect gate="G$1" pin="VIN" pad="5"/>
 <connect gate="G$1" pin="VOUT" pad="4"/>
 </connects>
@@ -7965,8 +7999,8 @@ DIN A4, landscape with location and doc. field</description>
 <part name="R2" library="registors" deviceset="R1608" device="" value="10k"/>
 <part name="+3V32" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="+3V33" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="A4L-LOC" device=""/>
-<part name="REG1" library="regulator" deviceset="NJM2884U1" device=""/>
+<part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="A4L-LOC" device="" value="Frame"/>
+<part name="REG1" library="regulator" deviceset="NJM2884" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -7998,15 +8032,15 @@ DIN A4, landscape with location and doc. field</description>
 <attribute name="NAME" x="62.484" y="15.621" size="1.778" layer="95"/>
 <attribute name="VALUE" x="58.674" y="13.081" size="1.778" layer="96"/>
 </instance>
-<instance part="R9" gate="G$1" x="10.16" y="-15.24" smashed="yes">
-<attribute name="NAME" x="6.35" y="-13.7414" size="1.778" layer="95"/>
-<attribute name="VALUE" x="6.096" y="-11.176" size="1.778" layer="96"/>
+<instance part="R9" gate="G$1" x="7.62" y="-15.24" smashed="yes">
+<attribute name="NAME" x="3.81" y="-13.7414" size="1.778" layer="95"/>
+<attribute name="VALUE" x="3.556" y="-11.176" size="1.778" layer="96"/>
 </instance>
 <instance part="R3" gate="G$1" x="25.4" y="58.42"/>
 <instance part="R4" gate="G$1" x="25.4" y="38.1"/>
-<instance part="R10" gate="G$1" x="10.16" y="-17.78" smashed="yes">
-<attribute name="NAME" x="6.35" y="-21.3614" size="1.778" layer="95"/>
-<attribute name="VALUE" x="6.35" y="-23.622" size="1.778" layer="96"/>
+<instance part="R10" gate="G$1" x="7.62" y="-17.78" smashed="yes">
+<attribute name="NAME" x="3.81" y="-21.3614" size="1.778" layer="95"/>
+<attribute name="VALUE" x="3.81" y="-23.622" size="1.778" layer="96"/>
 </instance>
 <instance part="GND1" gate="1" x="-30.48" y="53.34"/>
 <instance part="GND3" gate="1" x="-81.28" y="40.64"/>
@@ -8439,8 +8473,8 @@ DIN A4, landscape with location and doc. field</description>
 </segment>
 <segment>
 <pinref part="R10" gate="G$1" pin="1"/>
-<wire x1="5.08" y1="-17.78" x2="2.54" y2="-17.78" width="0.1524" layer="91"/>
-<label x="2.54" y="-17.78" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="2.54" y1="-17.78" x2="0" y2="-17.78" width="0.1524" layer="91"/>
+<label x="0" y="-17.78" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="RXD" class="0">
@@ -8451,22 +8485,22 @@ DIN A4, landscape with location and doc. field</description>
 </segment>
 <segment>
 <pinref part="R9" gate="G$1" pin="1"/>
-<wire x1="5.08" y1="-15.24" x2="2.54" y2="-15.24" width="0.1524" layer="91"/>
-<label x="2.54" y="-15.24" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="2.54" y1="-15.24" x2="0" y2="-15.24" width="0.1524" layer="91"/>
+<label x="0" y="-15.24" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="N$10" class="0">
 <segment>
 <pinref part="R9" gate="G$1" pin="2"/>
 <pinref part="IC2" gate="G$1" pin="TXD"/>
-<wire x1="15.24" y1="-15.24" x2="27.94" y2="-15.24" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="-15.24" x2="27.94" y2="-15.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$11" class="0">
 <segment>
 <pinref part="R10" gate="G$1" pin="2"/>
 <pinref part="IC2" gate="G$1" pin="RXD"/>
-<wire x1="15.24" y1="-17.78" x2="27.94" y2="-17.78" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="-17.78" x2="27.94" y2="-17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$14" class="0">

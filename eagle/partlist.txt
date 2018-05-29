@@ -1,0 +1,44 @@
+Partlist
+
+Exported from espr-temp.sch at 2018/05/29 20:20
+
+EAGLE Version 8.3.1 Copyright (c) 1988-2017 Autodesk, Inc.
+
+Assembly variant: 
+
+Part     Value          Device                 Package           Library       Sheet   value? akituki? have?
+
+C1       0.39u          C-EUC1608              C1608             rcl           1       x      x        仙石で買う
+C2       4.7u           C-EUC3216              C3216             rcl           1       x      x        x
+C3       0.1u           C-EUC2012              C2012             rcl           1       x      x        x
+C4       0.1u           C-EUC2012              C2012             rcl           1       x      x        x
+IC1      FT231XS-R      FT231XS-R              SOP64P599X175-20N FT231XS-R     1       x      x        x
+IC2      ESP-WROOM-02   ESP-WROOM-02FRONT-FACE FRONT-FACE        esp-wroom-02  1       x      x        x
+IC3      AM2320         AM2320                 AM2320            am2320        1       x      x        x
+LED1     (RX red)       OSHR1608               C1608             led-smd       1       x      x        秋月で買う
+LED2     (TX green)     OSYG1608               C1608             led-smd       1       x      x        x
+LED3     (prw yellow)   OSYL1608               C1608             led-smd       1       x      x        x
+LED4     (apl blue)     OSBL1608               C1608             led-smd       1       x      x        秋月で買う
+R1       10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R2       10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R3       10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R4       10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R5       10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R6       10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R7       10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R8       10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R9       470            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R10      470            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R11      10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R12      1k             R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R13      1k             R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R14      10k            R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R15      1k             R1608                  R1608             registors     1       x      x        仙石0.1w 1608 を買う
+R16      4.7k           R-EU_M0805             M0805             rcl           1       x      x        x TODO:ほんとに持ってる？
+REG1     NJM2884U1      NJM2884U1              SOT-89-5          regulator     1       x      x        秋月で買う
+SW1                     SKRPACE010             SKRPACE010        switches      1       x      x        x
+SW2                     SKRPACE010             SKRPACE010        switches      1       x      x        x
+SW3                     SKRPACE010             SKRPACE010        switches      1       x      x        x
+T1                      2PD601A                SOT346            transistors   1       x      x        秋月で買う
+T2                      2PD601A                SOT346            transistors   1       x      x        秋月で買う
+USB1     MICRO-USB      MICRO-USB              ZX62B5PA          usb-connector 1       x      x        x

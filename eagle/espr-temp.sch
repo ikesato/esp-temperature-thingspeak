@@ -7268,8 +7268,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <library name="esp-wroom-02">
 <description>WiFi Module - ESP-WROOM-02</description>
 <packages>
-<package name="FRONT-FACE">
-<description>Front Face Top</description>
+<package name="ESP-WROOM-02">
 <wire x1="-9" y1="-8" x2="9" y2="-8" width="0.2032" layer="21"/>
 <text x="-4.445" y="2.3" size="1.016" layer="27">&gt;VALUE</text>
 <smd name="1" x="-8.8925" y="4.9" dx="1.485" dy="0.9" layer="1" cream="no"/>
@@ -7310,36 +7309,21 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <wire x1="7.62" y1="5.08" x2="-7.62" y2="5.08" width="0.127" layer="51"/>
 <wire x1="-7.62" y1="5.08" x2="-7.62" y2="-7.3025" width="0.127" layer="51"/>
 <circle x="-6.0325" y="-5.715" radius="0.635" width="0.127" layer="51"/>
-<rectangle x1="-1.27" y1="-4.7625" x2="4.445" y2="0.9525" layer="41"/>
 <wire x1="-9" y1="12" x2="-9" y2="5.842" width="0.2032" layer="21"/>
 <wire x1="9" y1="12" x2="9" y2="5.842" width="0.2032" layer="21"/>
-</package>
-<package name="BACK-FACE">
-<description>Back Face Top</description>
-<wire x1="-9" y1="-8" x2="9" y2="-8" width="0.2032" layer="21"/>
-<wire x1="9" y1="-8" x2="9" y2="12" width="0.2032" layer="21"/>
-<wire x1="9" y1="12" x2="-9" y2="12" width="0.2032" layer="21"/>
-<wire x1="-9" y1="12" x2="-9" y2="-8" width="0.2032" layer="21"/>
-<text x="-5.715" y="-0.24" size="1.016" layer="27">&gt;VALUE</text>
-<smd name="1" x="8.575" y="4.9" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="2" x="8.575" y="3.4" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="3" x="8.575" y="1.9" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="4" x="8.575" y="0.4" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="5" x="8.575" y="-1.1" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="6" x="8.575" y="-2.6" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="7" x="8.575" y="-4.1" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="8" x="8.575" y="-5.6" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="9" x="8.575" y="-7.1" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="10" x="-8.575" y="-7.1" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="11" x="-8.575" y="-5.6" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="12" x="-8.575" y="-4.1" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="13" x="-8.575" y="-2.6" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="14" x="-8.575" y="-1.1" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="15" x="-8.575" y="0.4" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="16" x="-8.575" y="1.9" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="17" x="-8.575" y="3.4" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<smd name="18" x="-8.575" y="4.9" dx="0.9" dy="0.85" layer="1" cream="no"/>
-<text x="-8.255" y="12.46" size="1.27" layer="25">&gt;NAME</text>
+<pad name="19" x="1" y="-1.5" drill="1.5" diameter="2" shape="square"/>
+<polygon width="0.6096" layer="1">
+<vertex x="-1" y="0.5"/>
+<vertex x="3" y="0.5"/>
+<vertex x="3" y="-3.5"/>
+<vertex x="-1" y="-3.5"/>
+</polygon>
+<polygon width="0.8096" layer="29">
+<vertex x="-1" y="0.5"/>
+<vertex x="3" y="0.5"/>
+<vertex x="3" y="-3.5"/>
+<vertex x="-1" y="-3.5"/>
+</polygon>
 </package>
 </packages>
 <symbols>
@@ -7368,6 +7352,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <pin name="EN" x="20.32" y="7.62" length="middle" rot="R180"/>
 <pin name="3V3" x="20.32" y="10.16" length="middle" direction="pwr" rot="R180"/>
 <text x="-11.176" y="22.098" size="1.778" layer="95">&gt;NAME</text>
+<pin name="GND0" x="20.32" y="-10.16" visible="off" length="point" direction="pwr" swaplevel="1" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -7377,35 +7362,11 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <gate name="G$1" symbol="ESP-WROOM-02" x="7.62" y="-7.62"/>
 </gates>
 <devices>
-<device name="FRONT-FACE" package="FRONT-FACE">
+<device name="" package="ESP-WROOM-02">
 <connects>
 <connect gate="G$1" pin="3V3" pad="1"/>
 <connect gate="G$1" pin="EN" pad="2"/>
-<connect gate="G$1" pin="GND1" pad="9"/>
-<connect gate="G$1" pin="GND2" pad="13"/>
-<connect gate="G$1" pin="GND3" pad="18"/>
-<connect gate="G$1" pin="IO0" pad="8"/>
-<connect gate="G$1" pin="IO12" pad="4"/>
-<connect gate="G$1" pin="IO13" pad="5"/>
-<connect gate="G$1" pin="IO14" pad="3"/>
-<connect gate="G$1" pin="IO15" pad="6"/>
-<connect gate="G$1" pin="IO16" pad="17"/>
-<connect gate="G$1" pin="IO2" pad="7"/>
-<connect gate="G$1" pin="IO4" pad="10"/>
-<connect gate="G$1" pin="IO5" pad="14"/>
-<connect gate="G$1" pin="RST" pad="15"/>
-<connect gate="G$1" pin="RXD" pad="11"/>
-<connect gate="G$1" pin="TOUT" pad="16"/>
-<connect gate="G$1" pin="TXD" pad="12"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="BACK-FACE" package="BACK-FACE">
-<connects>
-<connect gate="G$1" pin="3V3" pad="1"/>
-<connect gate="G$1" pin="EN" pad="2"/>
+<connect gate="G$1" pin="GND0" pad="19"/>
 <connect gate="G$1" pin="GND1" pad="9"/>
 <connect gate="G$1" pin="GND2" pad="13"/>
 <connect gate="G$1" pin="GND3" pad="18"/>
@@ -7971,7 +7932,7 @@ DIN A4, landscape with location and doc. field</description>
 <part name="R14" library="registors" deviceset="R1608" device="" value="10k"/>
 <part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="LED3" library="led-smd" deviceset="OSYL1608" device=""/>
-<part name="IC2" library="esp-wroom-02" deviceset="ESP-WROOM-02" device="FRONT-FACE" value="ESP-WROOM-02"/>
+<part name="IC2" library="esp-wroom-02" deviceset="ESP-WROOM-02" device="" value="ESP-WROOM-02"/>
 <part name="IC1" library="FT231XS-R" deviceset="FT231XS-R" device=""/>
 <part name="R8" library="registors" deviceset="R1608" device="" value="10k"/>
 <part name="+3V39" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
@@ -8282,6 +8243,8 @@ DIN A4, landscape with location and doc. field</description>
 <wire x1="66.04" y1="-20.32" x2="71.12" y2="-20.32" width="0.1524" layer="91"/>
 <pinref part="GND11" gate="1" pin="GND"/>
 <wire x1="71.12" y1="-20.32" x2="71.12" y2="-27.94" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="GND0"/>
+<junction x="66.04" y="-20.32"/>
 </segment>
 <segment>
 <pinref part="SW3" gate="G$1" pin="0@A"/>
